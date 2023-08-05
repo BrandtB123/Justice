@@ -1,28 +1,41 @@
 package main
 
 import (
-	"fmt"
+	"net/http"
+	"os"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
-	fmt.Println("Starting the application...")
 
-	// Perform configuration, database connections, etc.
+	e := echo.New()
 
-	// router := setupRouter()
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
-	// port := 8080
-	// fmt.Printf("Listening on port %d...\n", port)
-	// log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), router))
+	e.GET("/", func(c echo.Context) error {
+		return c.HTML(http.StatusOK, "Hello, Docker! <3")
+	})
+
+	e.GET("/health", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
+	})
+
+	httpPort := os.Getenv("PORT")
+	if httpPort == "" {
+		httpPort = "8080"
+	}
+
+	e.Logger.Fatal(e.Start(":" + httpPort))
 }
 
-// func setupRouter() *http.ServeMux {
-// 	router := http.NewServeMux()
-// 	// Define your routes here
-// 	router.HandleFunc("/api/v1/hello", handleHello)
-// 	return router
-// }
-
-// func handleHello(w http.ResponseWriter, r *http.Request) {
-// 	fmt.Fprintf(w, "Hello, World!")
-// }
+// Simple implementation of an integer minimum
+// Adapted from: https://gobyexample.com/testing-and-benchmarking
+func IntMin(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
