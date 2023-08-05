@@ -1,7 +1,7 @@
 # Dockerfile
 FROM golang:1.16
 
-WORKDIR /app
+WORKDIR /justice
 COPY . .
 
 RUN go build -o myapp
