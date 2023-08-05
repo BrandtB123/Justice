@@ -1,9 +1,0 @@
-# Dockerfile
-FROM golang:1.16
-
-WORKDIR /justice
-COPY . .
-
-RUN go build -o myapp
-
-CMD ["./myapp"]

@@ -1,0 +1,1 @@
+Could also use apache instead of nginx
