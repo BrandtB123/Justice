@@ -14,7 +14,7 @@ RUN go mod download
 COPY . .
 
 # Build
-RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping  ./cmd/justice
+RUN CGO_ENABLED=0 GOOS=linux go build -o /server  ./cmd/justice
 
 # Optional:
 # To bind to a TCP port, runtime parameters must be supplied to the docker command.
@@ -24,4 +24,4 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping  ./cmd/justice
 EXPOSE 8080
 
 # Run
-CMD ["/docker-gs-ping"]
+CMD ["/server"]

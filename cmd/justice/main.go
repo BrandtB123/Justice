@@ -4,9 +4,20 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/go-chi/chi"
+	mw "github.com/go-chi/chi/middleware"
+	"github.com/go-chi/render"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
+
+func Router() *chi.Mux {
+	router := chi.NewRouter()
+	router.Use(
+		render.SetContentType(render.ContentTypeJSON),
+		mw.Logger,
+	)
+}
 
 func main() {
 

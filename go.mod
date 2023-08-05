@@ -7,6 +7,8 @@ require github.com/labstack/echo/v4 v4.11.1
 require github.com/go-pg/pg v8.0.7+incompatible
 
 require (
+	github.com/ajg/form v1.5.1 // indirect
+	github.com/go-chi/render v1.0.3 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/labstack/gommon v0.4.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
@@ -23,6 +25,7 @@ require (
 
 require (
 	github.com/BurntSushi/toml v1.3.2 // indirect
+	github.com/go-chi/chi v1.5.4
 	github.com/ilyakaznacheev/cleanenv v1.5.0
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
