@@ -1,0 +1,8 @@
+services:
+  app:
+    image: my-justice-app
+    ports:
+      - 8080:8080
+    working_dir: /justice
+    volumes:
+      - ./:/justice
