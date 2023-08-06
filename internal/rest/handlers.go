@@ -7,11 +7,23 @@ import (
 	"justice/api"
 	"justice/internal/model"
 
+	"github.com/gorilla/mux"
 	"github.com/labstack/echo/v4"
 )
 
-func Hello(w http.ResponseWriter, r *http.Request) {
+func Base(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "<h1>This is the homepage. Try /hello and /hello/Sammy\n</h1>")
+}
+
+func Hello(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "<h1>Hello from Docker!\n</h1>")
+}
+
+func Name(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	title := vars["name"]
+
+	fmt.Fprintf(w, "<h1>Hello, %s!\n</h1>", title)
 }
 
 // CreateTaskHandler handles the creation of a new task

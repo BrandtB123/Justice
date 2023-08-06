@@ -1,8 +1,8 @@
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: my-go-app-config
-# data:
-#   apiConfig.yaml: |
-#     api_endpoint: /api/v1
-#     max_requests: 100
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-go-app-config
+data:
+  apiConfig.yaml: |
+    api_endpoint: /api/v1
+    max_requests: 100

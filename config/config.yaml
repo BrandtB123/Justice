@@ -5,3 +5,11 @@ database:
 server:
   host: localhost
   port: 8888
+
+logger:
+  level: info
+  encoding: console
+  outputPaths:
+    - stdout
+  errorOutputPaths:
+    - stderr
