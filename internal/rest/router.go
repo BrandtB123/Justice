@@ -10,9 +10,7 @@ import (
 func SetupRouter() *mux.Router {
 	r := mux.NewRouter()
 
-	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "<h1>This is the homepage. Try /hello and /hello/Sammy\n</h1>")
-	})
+	r.HandleFunc("/", Hello)
 
 	r.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "<h1>Hello from Docker!\n</h1>")

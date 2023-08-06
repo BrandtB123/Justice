@@ -1,6 +1,7 @@
 package rest
 
 import (
+	"fmt"
 	"net/http"
 
 	"justice/api"
@@ -8,6 +9,10 @@ import (
 
 	"github.com/labstack/echo/v4"
 )
+
+func Hello(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "<h1>This is the homepage. Try /hello and /hello/Sammy\n</h1>")
+}
 
 // CreateTaskHandler handles the creation of a new task
 func CreateTaskHandler(c echo.Context) error {
