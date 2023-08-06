@@ -4,20 +4,17 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/go-chi/chi"
-	mw "github.com/go-chi/chi/middleware"
-	"github.com/go-chi/render"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func Router() *chi.Mux {
-	router := chi.NewRouter()
-	router.Use(
-		render.SetContentType(render.ContentTypeJSON),
-		mw.Logger,
-	)
-}
+// func Router() *chi.Mux {
+// 	router := chi.NewRouter()
+// 	router.Use(
+// 		render.SetContentType(render.ContentTypeJSON),
+// 		mw.Logger,
+// 	)
+// }
 
 func main() {
 
@@ -27,7 +24,7 @@ func main() {
 	e.Use(middleware.Recover())
 
 	e.GET("/", func(c echo.Context) error {
-		return c.HTML(http.StatusOK, "Hello, Docker! <3")
+		return c.HTML(http.StatusOK, "Hello, lol! <3")
 	})
 
 	e.GET("/health", func(c echo.Context) error {
