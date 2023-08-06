@@ -1,8 +1,10 @@
+version: '3'
 services:
-  app:
-    image: my-justice-app
-    ports:
-      - 8080:8080
-    working_dir: /justice
-    volumes:
-      - ./:/justice
+  my-justice-app:
+    restart: always
+    build:
+      context: ../../
+      dockerfile: Dockerfile
+    environment:
+      - VIRTUAL_HOST=https://3.133.149.241/
+      - LETSENCRYPT_HOST=https://3.133.149.241/

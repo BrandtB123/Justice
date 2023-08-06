@@ -1,40 +1,29 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
-	"os"
 
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	"github.com/gorilla/mux"
 )
 
-// func Router() *chi.Mux {
-// 	router := chi.NewRouter()
-// 	router.Use(
-// 		render.SetContentType(render.ContentTypeJSON),
-// 		mw.Logger,
-// 	)
-// }
-
 func main() {
+	r := mux.NewRouter()
 
-	e := echo.New()
-
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-
-	e.GET("/", func(c echo.Context) error {
-		return c.HTML(http.StatusOK, "Hello, lol! <3")
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "<h1>This is the homepage. Try /hello and /hello/Sammy\n</h1>")
 	})
 
-	e.GET("/health", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
+	r.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "<h1>Hello from Docker!\n</h1>")
 	})
 
-	httpPort := os.Getenv("PORT")
-	if httpPort == "" {
-		httpPort = "8080"
-	}
+	r.HandleFunc("/hello/{name}", func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		title := vars["name"]
 
-	e.Logger.Fatal(e.Start(":" + httpPort))
+		fmt.Fprintf(w, "<h1>Hello, %s!\n</h1>", title)
+	})
+
+	http.ListenAndServe(":9000", r)
 }

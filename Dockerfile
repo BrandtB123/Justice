@@ -1,27 +1,13 @@
-# syntax=docker/dockerfile:1
-
-FROM golang:1.19
-
-# Set destination for COPY
-WORKDIR /justice
-
-# Download Go modules
-COPY go.mod go.sum ./
-RUN go mod download
-
-# Copy the source code. Note the slash at the end, as explained in
-# https://docs.docker.com/engine/reference/builder/#copy
+FROM golang:alpine AS build
+RUN apk --no-cache add gcc g++ make git
+WORKDIR /go/src/app
 COPY . .
+RUN go mod tidy
+RUN GOOS=linux go build -ldflags="-s -w" -o ./bin/web-app ./cmd/justice
 
-# Build
-RUN CGO_ENABLED=0 GOOS=linux go build -o /server  ./cmd/justice
-
-# Optional:
-# To bind to a TCP port, runtime parameters must be supplied to the docker command.
-# But we can document in the Dockerfile what ports
-# the application is going to listen on by default.
-# https://docs.docker.com/engine/reference/builder/#expose
-EXPOSE 8080
-
-# Run
-CMD ["/server"]
+FROM alpine:3.17
+RUN apk --no-cache add ca-certificates
+WORKDIR /usr/bin
+COPY --from=build /go/src/app/bin /go/bin
+EXPOSE 9000
+ENTRYPOINT /go/bin/web-app --port 9000
