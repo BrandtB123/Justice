@@ -9,7 +9,7 @@ import (
 
 func main() {
 	r := mux.NewRouter()
-
+	asdf
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "<h1>This is the homepage. Try /hello and /hello/Sammy\n</h1>")
 	})

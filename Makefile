@@ -1,5 +1,5 @@
 # Build Docker images
-build:
+image:
 	docker build -t my-justice-app .   
 
 # Start containers
