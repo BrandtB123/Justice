@@ -1,6 +1,28 @@
 version: '3'
 services:
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    ports:
+      - "3000:3000"
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./../../config/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
   my-justice-app:
     image: my-justice-app
     ports:
       - "9000:9000"
+  postgres:
+    image: postgres:latest
+    container_name: my-postgres
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5432:5432"
