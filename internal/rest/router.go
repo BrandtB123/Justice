@@ -11,5 +11,8 @@ func SetupRouter() *mux.Router {
 	r.HandleFunc("/hello", Hello)
 	r.HandleFunc("/hello/{name}", Name)
 
+	r.HandleFunc("/health", Health)
+	r.HandleFunc("/readiness", Readiness)
+
 	return r
 }

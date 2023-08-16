@@ -11,6 +11,16 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+func Health(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusInternalServerError) // Set the status code to 200 OK
+	w.Write([]byte("ER"))
+}
+
+func Readiness(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK) // Set the status code to 200 OK
+	w.Write([]byte("OK"))
+}
+
 func Base(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "<h1>This is the homepage. Try /hello and /hello/Sammy\n</h1>")
 }
