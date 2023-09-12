@@ -11,7 +11,7 @@ spec:
   template:                      # This deployment will create a set of pods using the configurations in this template
     metadata:
       labels:                    # The labels that will be applied to all of the pods in this deployment
-        app: go-hello-world 
+        app: go-hello-world
     spec:                        # Spec for the container which will run in the Pod
       containers:
       - name: go-hello-world

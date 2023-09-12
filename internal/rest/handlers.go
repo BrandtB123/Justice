@@ -12,8 +12,8 @@ import (
 )
 
 func Health(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusInternalServerError) // Set the status code to 200 OK
-	w.Write([]byte("ER"))
+	w.WriteHeader(http.StatusOK) // Set the status code to 200 OK
+	w.Write([]byte("OK"))
 }
 
 func Readiness(w http.ResponseWriter, r *http.Request) {
